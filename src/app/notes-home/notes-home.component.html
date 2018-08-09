@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row">
+  <div class="col-sm-4">
+    <button class="btn btn-success btn-block" type="button" (click)="newNote()">+ Create Note</button>
+    <note-list (SelectNote)="onSelectNote($event)" [notes]="notes" ></note-list>    
+  </div>
+  <div class="col-sm-8">
+    <div *ngIf="!hidenewNote">
+      <h2>New Note</h2>
+      <form #form="ngForm" (ngSubmit)="onSubmitAddNote(form.value)" class="well">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" required name="title" ngModel>
+        </div>
+        <div class="form-group">
+          <label>Image Url</label>
+          <input type="text" class="form-control" required name="url" ngModel>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" class="form-control" required name="description" ngModel>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
+    </div>
+    <note-detail (updateNoteEvent)="onUpdateNoteEvent($event)" 
+    (deleteNoteEvent)="onDeleteNoteEvent($event)" 
+    *ngIf="selectedNote && hidenewNote" [note]="selectedNote"></note-detail>
+  </div>  
+</div>
+</div>
